@@ -1,1 +1,0 @@
-# Realtime ChatApp (MERN Stack)
