@@ -21,7 +21,6 @@ const protectRoutes = async (req, res, next) => {
         }
 
         req.user = user;
-
         next();
     } catch (error) {
         console.log("Error in protectRoutes Middleware", error.message);
