@@ -1,10 +1,13 @@
+import Login from "./pages/login/Login"
+import Signup from "./pages/signup/Signup"
 
 function App() {
 
   return (
     <>
-      <div>
-        <h1 className="text-green-500">Chat app</h1>
+      <div className="p-5 h-screen flex justify-center items-center">
+        {/* <Login /> */}
+        <Signup />
       </div >
     </>
   )
