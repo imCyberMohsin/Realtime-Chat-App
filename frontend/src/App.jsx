@@ -1,3 +1,4 @@
+import Home from "./pages/home/Home"
 import Login from "./pages/login/Login"
 import Signup from "./pages/signup/Signup"
 
@@ -7,7 +8,8 @@ function App() {
     <>
       <div className="p-5 h-screen flex justify-center items-center">
         {/* <Login /> */}
-        <Signup />
+        {/* <Signup /> */}
+        <Home/>
       </div >
     </>
   )
