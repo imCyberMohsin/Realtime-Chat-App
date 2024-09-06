@@ -1,30 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useAuthContext } from '../../context/AuthContext'
+import useConversation from '../../zustand/useConversation';
+import { extractTime } from '../utils/extractTime'
 
-const Message = () => {
+const Message = ({ message }) => {
+    const { authUser } = useAuthContext();
+    const { selectedConversation } = useConversation();
+    const [isHovering, setIsHovering] = useState(false);
+
+    const fromMe = message.senderId == authUser._id;
+    const chatClassname = fromMe ? 'chat chat-end' : 'chat chat-start';
+    const profilePic = fromMe ? authUser.profilePic : selectedConversation.profilePic;
+    const bubbleBgColor = fromMe ? 'bg-green-500' : 'bg-zinc-600';
+
+    // Format the timestamp if it's a valid date string or timestamp
+    const formattedTime = extractTime(message.createdAt);
+
     return (
         <>
-            <div className='flex'>
-                <div className="chat chat-start w-1/2">
-                    <div className="chat-image avatar">
-                        <div className="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS chat bubble component"
-                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                        </div>
+            <div className={`${chatClassname}`}>
+                <div className="chat-image avatar">
+                    <div className="w-10 rounded-full">
+                        <img
+                            alt="Tailwind CSS chat bubble component"
+                            src={profilePic} />
                     </div>
-                    <div className="chat-bubble text-white bg-zinc-600">I'm Happy to have you</div>
-                    <div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>12:42</div>
                 </div>
-                <div className="chat chat-end w-1/2">
-                    <div className="chat-image avatar">
-                        <div className="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS chat bubble component"
-                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                        </div>
-                    </div>
-                    <div className="chat-bubble text-white bg-green-500">Same here</div>
-                    <div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>12:42</div>
+                <div className={`chat-bubble text-white ${bubbleBgColor}`}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                >
+                    {message.message}
+                </div>
+                <div className={`chat-footer text-xs flex gap-1 mt-1 items-center cursor-pointer transition-all ${isHovering ? 'opacity-75' : 'opacity-0'}`}>
+                    {formattedTime}
                 </div>
             </div>
         </>
