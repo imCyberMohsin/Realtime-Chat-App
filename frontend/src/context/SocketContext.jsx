@@ -16,9 +16,11 @@ export const SocketContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (authUser) {
-            const socket = io('http://localhost:3000', {
+            // Backend URL in Development
+            // Website URL in Production
+            const socket = io(import.meta.env.VITE_SOCKET_URL, {
                 query: { userId: authUser._id }
-            });     // Backend URL
+            });
             setSocket(socket);
 
             // Get online users 
