@@ -9,7 +9,7 @@ const Conversations = () => {
 
     return (
         <>
-            <div className='py-2 flex flex-col overflow-auto'>
+            <div className='py-2 flex flex-col gap-1 overflow-auto'>
                 {
                     conversations.map((conversation, index) => {
                         return (
@@ -17,7 +17,7 @@ const Conversations = () => {
                                 key={conversation._id}
                                 conversation={conversation}
                                 emoji={getRandomEmoji()}
-                                lastIndex={index == conversation.length - 1}
+                                lastIndex={index === conversations.length - 1}
                             />
                         )
                     })

@@ -23,7 +23,7 @@ const SearchInput = () => {
             return conversation?.fullname?.toLowerCase().includes(search.toLowerCase());
         })
 
-        if(filteredConversations) {
+        if (filteredConversations) {
             setSelectedConversation(filteredConversations);
             setSearch('');
         } else {
@@ -39,12 +39,12 @@ const SearchInput = () => {
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="input input-bordered rounded-full input-success w-full max-w-xs"
+                    className="input input-bordered rounded-full input-success w-full max-w-xs transition-all"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
 
-                <button type='submit' className='btn btn-circle bg-green-600 text-white'>
+                <button type='submit' className='btn btn-circle bg-green-500 hover:bg-green-700 text-white'>
                     <IoSearchSharp className='w-6 h-6 outline-none' />
                 </button>
             </form>
